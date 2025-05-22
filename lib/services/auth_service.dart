@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
   static const _baseUrl = 'https://your-domain.com/api';
@@ -50,6 +52,23 @@ class AuthService {
       debugPrint('Register error: \$e');
     }
     return false;
+  }
+
+ final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<UserCredential?> signInWithFacebook() async {
+    try {
+      final LoginResult result = await FacebookAuth.instance.login();
+
+      if (result.status == LoginStatus.success) {
+        final OAuthCredential facebookAuthCredential =
+            FacebookAuthProvider.credential(result.accessToken!.token);
+        return await _auth.signInWithCredential(facebookAuthCredential);
+      }
+      return null;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   /// Login dengan Google atau Facebook token
