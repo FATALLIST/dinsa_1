@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
         color: Theme.of(context).scaffoldBackgroundColor,
         child: Center(
           child: Image.asset(
-            'assets/images/dinsa_logo.png',
+            'assets/images/dinsa-logo.png',
             width: 150,
             height: 150,
           ),
