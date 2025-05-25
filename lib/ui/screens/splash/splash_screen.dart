@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     // Delay then navigate
-    Timer(const Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 4), () {
       context.go('/welcome');
     });
   }
